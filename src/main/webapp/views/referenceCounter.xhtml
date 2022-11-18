@@ -4,11 +4,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:p="http://primefaces.org/ui"
       xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
-
 <h:head>
     <title>References Counter</title>
 </h:head>
-
 <h:body>
     <p:panelGrid columns="1" style="margin-left: auto;
              margin-right: auto; margin-top: 30px">
@@ -17,14 +15,13 @@
             <br/>
             <p:inputText id="getReferenceList" value="#{referencesCounterBean.path}" size="50"/>
             <br/> <br/>
-            <h:commandButton   value="Анализировать"
-                               action="#{referencesCounterBean.workWithReference()}"
-                               widgetVar="placeOrderButton"
+            <p:commandButton   value="Анализировать"
+                               widgetVar="referenceButton"
                                actionListener="#{referencesCounterBean.workWithReference()}"
-                               onstart="PF('placeOrderButton').disable();PF('progressPanel').show();"
-                               oncomplete="PF('placeOrderButton').enable();PF('progressPanel').close();">
-                <f:ajax execute="@form" render=":referenceTable"/>
-            </h:commandButton>
+                               onstart="PF('referenceButton').disable();PF('progressPanel').show();"
+                               oncomplete="PF('referenceButton').enable();PF('progressPanel').close();">
+                <f:ajax execute="referenceField" render="referenceTable"/>
+            </p:commandButton>
             <p:panel widgetVar="progressPanel"
                      visible="false"
                      style="border:none;"
@@ -54,12 +51,11 @@
             </h:form>
         </p:column>
     </p:dataTable>
-
     <br/> <br/>
-
     <h:form id="clearTable">
-        <h:commandButton value="Очистить" action="#{referencesCounterBean.clearTable()}">
-        </h:commandButton>
+        <p:commandButton value="Очистить" actionListener="#{referencesCounterBean.clearTable()}">
+            <f:ajax execute="@form" render="referenceTable"/>
+        </p:commandButton>
     </h:form>
 </h:body>
 </html>

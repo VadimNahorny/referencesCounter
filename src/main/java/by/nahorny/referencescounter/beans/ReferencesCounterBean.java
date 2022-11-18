@@ -46,9 +46,11 @@ public class ReferencesCounterBean {
 
     }
 
-    public void clearTable() {
+    public String clearTable() {
         System.out.println("метод clearTable выполняется");
         if (referencesList!=null)
         referencesList.clear();
+        path = null;
+        return "referenceCounter.xhtml";
     }
 }
