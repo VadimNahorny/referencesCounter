@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+    <title>References Counter</title>
+</h:head>
+
+<h:body>
+    <p:panelGrid columns="1" style="margin-left: auto;
+             margin-right: auto; margin-top: 30px">
+        <h:form id="referenceField">
+            <p:outputLabel value="Анализируемая страница"/>
+            <br/>
+            <p:inputText id="getReferenceList" value="#{referencesCounterBean.path}" size="50"/>
+            <br/> <br/>
+            <h:commandButton   value="Анализировать"
+                               action="#{referencesCounterBean.workWithReference()}"
+                               widgetVar="placeOrderButton"
+                               actionListener="#{referencesCounterBean.workWithReference()}"
+                               onstart="PF('placeOrderButton').disable();PF('progressPanel').show();"
+                               oncomplete="PF('placeOrderButton').enable();PF('progressPanel').close();">
+                <f:ajax execute="@form" render=":referenceTable"/>
+            </h:commandButton>
+            <p:panel widgetVar="progressPanel"
+                     visible="false"
+                     style="border:none;"
+                     closable="true"
+                     toggleable="true">
+                <p:progressBar style="height:20px;width:400px;"
+                               mode="indeterminate"/>
+            </p:panel>
+        </h:form>
+    </p:panelGrid>
+    <br/> <br/>
+
+    <p:dataTable id="referenceTable" value="#{referencesCounterBean.referencesList}" var="reference">
+        <p:column headerText="№ п/п" width="80">
+            <h:outputText value="#{reference.number}"/>
+        </p:column>
+        <p:column headerText="Имя ссылки">
+            <h:outputText value="#{reference.name}"/>
+        </p:column>
+        <p:column headerText="Адрес ссылки">
+            <h:form>
+                <input type="hidden" name="oneReferenceHidden" value="#{reference.url}"/>
+                <h:commandLink action="#{referencesCounterBean.getOneReference()}"
+                               value="#{reference.url}">
+                    <f:ajax execute="oneReferenceHidden" render="referenceField"/>
+                </h:commandLink>
+            </h:form>
+        </p:column>
+    </p:dataTable>
+
+    <br/> <br/>
+
+    <h:form id="clearTable">
+        <h:commandButton value="Очистить" action="#{referencesCounterBean.clearTable()}">
+        </h:commandButton>
+    </h:form>
+</h:body>
+</html>
