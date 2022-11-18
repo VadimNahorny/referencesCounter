@@ -7,12 +7,11 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import javax.faces.bean.ManagedBean;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import static by.nahorny.referencescounter.service.strings.Message.*;
 
-@ManagedBean (name = "referenceService")
 public class ReferenceService {
 
 
@@ -22,11 +21,13 @@ public class ReferenceService {
         List<Reference> referenceList = new ArrayList<>();
         UrlValidator urlValidator = UrlValidatorSingleton.getUrlValidator();
         int i = 1;
+        String referenceName;
         for (Element link : references) {
             if (urlValidator.isValid(link.attr("abs:href"))) {
+                referenceName = (link.ownText().equals(""))?NOT_NAME:link.ownText();
                 referenceList.add
                         (new Reference(link.attr("abs:href"),
-                                link.ownText(),
+                                referenceName,
                                 i));
                 i++;
             }

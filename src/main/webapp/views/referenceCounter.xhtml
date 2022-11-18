@@ -14,7 +14,7 @@
             <p:outputLabel value="Анализируемая страница"/>
             <br/>
             <p:inputText style="width:600px" id="enterReference" value="#{referencesCounterBean.path}" size="50"/>
-            <p:messages id="errorMessage" styleClass="ui-log-error"/>
+            <p:messages id="errorMessage"/>
             <br/> <br/>
             <p:message for="enterReference" display="text"/>
             <p:commandButton style="margin-left: 36%;"
@@ -31,7 +31,7 @@
     <p:panel
             widgetVar="progressPanel"
             visible="false"
-            style="margin-left: auto; border:none !important;
+            style="margin-left: auto;
             margin-right: auto; width:636px;"
             closable="true"
             toggleable="true">
@@ -48,7 +48,7 @@
         <p:column headerText="Имя ссылки">
             <h:outputText value="#{reference.name}"/>
         </p:column>
-        <p:column headerText="Адрес ссылки">
+        <p:column headerText="Адрес ссылки" width="800">
             <h:form>
                 <input type="hidden" name="oneReferenceHidden" value="#{reference.url}"/>
                 <h:commandLink action="#{referencesCounterBean.getOneReference()}"
@@ -60,7 +60,7 @@
     </p:dataTable>
     <br/> <br/>
     <h:form id="clearTable">
-        <p:commandButton value="Очистить" update="referenceTable"
+        <p:commandButton value="Очистить" update="referenceTable,  referenceField"
                          actionListener="#{referencesCounterBean.clearTable()}">
             <p:ajax execute="@form" update="referenceTable"/>
         </p:commandButton>

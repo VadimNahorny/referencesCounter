@@ -23,8 +23,8 @@ import static by.nahorny.referencescounter.service.strings.Message.*;
 @Data
 public class ReferencesCounterBean {
 
-    String path;
-    List<Reference> referencesList = new ArrayList<>();
+    private String path;
+    private List<Reference> referencesList = new ArrayList<>();
 
 
     public List<Reference> workWithReference() throws MalformedURLException, IOException {
@@ -36,12 +36,12 @@ public class ReferencesCounterBean {
             } else {
                 referencesList.clear();
                 FacesContext.getCurrentInstance().addMessage(null,
-                        new FacesMessage(STRING_NOT_URL, STRING_NOT_URL));
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR, STRING_NOT_URL, STRING_NOT_URL));
             }
         } catch (UnknownHostException ignored) {
             referencesList.clear();
             FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(UNKNOWHOSTEXCEPTION, UNKNOWHOSTEXCEPTION));
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, UNKNOWHOSTEXCEPTION, UNKNOWHOSTEXCEPTION));
         }
         return referencesList;
     }
@@ -55,6 +55,6 @@ public class ReferencesCounterBean {
     public  void clearTable() {
         if (referencesList!= null)
             referencesList.clear();
-        path = null;
+        path = "";
     }
 }

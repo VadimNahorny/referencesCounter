@@ -8,9 +8,9 @@ import java.net.URL;
 @Data
 public class Reference {
 
-    URL url;
-    String name;
-    int number;
+    private URL url;
+    private String name;
+    private int number;
 
 
     public Reference(URL url, String name, int number) {
