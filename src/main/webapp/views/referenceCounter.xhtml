@@ -8,21 +8,22 @@
     <title>References Counter</title>
 </h:head>
 <h:body>
-    <p:panelGrid columns="1" style="margin-left: auto; border:none;
+    <p:panelGrid columns="1" style="margin-left: auto; width:600px;
              margin-right: auto; margin-top: 30px">
         <h:form id="referenceField">
             <p:outputLabel value="Анализируемая страница"/>
             <br/>
-            <p:inputText id="enterReference" value="#{referencesCounterBean.path}" size="50"/>
+            <p:inputText style="width:600px" id="enterReference" value="#{referencesCounterBean.path}" size="50"/>
             <p:messages id="errorMessage" styleClass="ui-log-error"/>
             <br/> <br/>
             <p:message for="enterReference" display="text"/>
-            <p:commandButton value="Анализировать"
-                             widgetVar="referenceButton"
-                             action="#{referencesCounterBean.workWithReference()}"
-                             update="referenceTable, errorMessage"
-                             onstart="PF('referenceButton').disable();PF('progressPanel').show();"
-                             oncomplete="PF('referenceButton').enable();PF('progressPanel').close();">
+            <p:commandButton style="margin-left: 36%;"
+                    value="Анализировать"
+                    widgetVar="referenceButton"
+                    action="#{referencesCounterBean.workWithReference()}"
+                    update="referenceTable, errorMessage"
+                    onstart="PF('referenceButton').disable();PF('progressPanel').show();"
+                    oncomplete="PF('referenceButton').enable();PF('progressPanel').close();">
                 <p:ajax execute="@form" update="errorMessage"/>
             </p:commandButton>
         </h:form>
@@ -31,11 +32,11 @@
             widgetVar="progressPanel"
             visible="false"
             style="margin-left: auto; border:none !important;
-            margin-right: auto; width:444px;"
+            margin-right: auto; width:460px;"
             closable="true"
             toggleable="true">
         <p:progressBar style="margin-left: auto;  margin-right: auto; height:20px;width:400px;"
-                       mode="indeterminate"/>
+                       styleClass="ui-progressbar-value" mode="indeterminate"/>
     </p:panel>
     <br/> <br/> <br/> <br/>
 
@@ -58,7 +59,8 @@
     </p:dataTable>
     <br/> <br/>
     <h:form id="clearTable">
-        <p:commandButton value="Очистить" update="referenceTable" actionListener="#{referencesCounterBean.clearTable()}">
+        <p:commandButton value="Очистить" update="referenceTable"
+                         actionListener="#{referencesCounterBean.clearTable()}">
             <p:ajax execute="@form" update="referenceTable"/>
         </p:commandButton>
     </h:form>

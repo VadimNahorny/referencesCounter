@@ -7,10 +7,12 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import javax.faces.bean.ManagedBean;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@ManagedBean (name = "referenceService")
 public class ReferenceService {
 
 
